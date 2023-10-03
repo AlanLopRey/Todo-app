@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A todo app challenge from frontendmentor"
+    />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABO1BMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////l9Pff8fS54ein2eOn2eL9/v684unr9vj7/f7c8PSl2eKHzNil2OLv+Prz+vue1eB3xdOq2uPm9Pf29/vy8/n3/Py13+eEyteZ097P6u/2+/zByeKOm8r8/f7u+Pq+4+qOz9uU0dzo9fjb4O5meLbh5fH0+vvV7fHx+fv8/P2Gk8Wbps+44eim2eLW2+xkdrXO1Oit3OWttthperja3u7u+Pn6+/2hrNJneLfFy+P7+/23v92IlcbN0ufx8/nj5/Kbp9BsfbltfrqAj8ORnsvg5PD+/v/v8ffQ1em0vduqtNfn6vS/61TcAAAAHHRSTlMAAAQqbK3Z8v0DN5ff+xqJ6jbC/kHBAjjp3qz8qSKHsgAAAAFiS0dEAf8CLd4AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfiChMPAx5FOtlkAAABSUlEQVQ4y4WTZ2OCMBCGc4IMEXAPjB10771t7dLuXbv3/v+/oNigIYjN+4HcJU9CcgMhVxASxLAkK4oshUUhBIgVqBEtqmNXelSLqF4EwDBjmFHMNADoejyRxD4lE/EGAZCScICkFCGc/YHrDkHOACON2yhtOABkTNxWZgYQZHPeqWKH18tlAakas6ezi3E1FQl5Fuhm3LyARD0AsIs9vSSmIrJwC9DXPzA4NEx8C0ktwMjo2PiE3YgFkokxOdUEpmdm5+YXXEBGCjEWl5bpHVZKq2tlMq+gAjHWNza9r9jarpD5QuMX1Z3dv3Fvn72T3LzkweFRfSgd+xJGn3lyeuZ8K+csYNFAXVzWrqr+bDmBoqG+vqnd3t3bDOCE2push8en55fXNzZZTLrfPz6/vn+oX083t2C4JccvWm7Z8xuH33r85v2v/X8Bp/FiyVLnL/0AAAAldEVYdGRhdGU6Y3JlYXRlADIwMTgtMTAtMTlUMTU6MDM6MzArMDI6MDCzEaEaAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE4LTEwLTE5VDE1OjAzOjMwKzAyOjAwwkwZpgAAAFd6VFh0UmF3IHByb2ZpbGUgdHlwZSBpcHRjAAB4nOPyDAhxVigoyk/LzEnlUgADIwsuYwsTIxNLkxQDEyBEgDTDZAMjs1Qgy9jUyMTMxBzEB8uASKBKLgDqFxF08kI1lQAAAABJRU5ErkJggg=="
+    />
+
+    <title>Frontend Mentor | Todo app</title>
+    <script type="module" crossorigin src="/Todo-app/assets/index-aea2bf5b.js"></script>
+    <link rel="stylesheet" href="/Todo-app/assets/index-b608c312.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-tw">
+        <h1 class="header__h1">Todo</h1>
+        <img
+          src="/Todo-app/assets/icon-moon-dadf6d0a.svg"
+          alt="svg light mode to dark mode"
+          class="header__img"
+        />
+      </div>
+    </header>
+    <main class="main">
+      <!--! the form that alowed us to input todos -->
+      <form class="form">
+        <input
+          class="form__input"
+          type="text"
+          placeholder="Create a new todo..."
+          autofocus
+        />
+      </form>
+
+      <!--! the todo container  -->
+      <div class="todos">
+        <!--? the todo that will make dynamically -->
+
+        <!--! the part that will tell us how many todos we have and the btn for delete the completed -->
+      </div>
+      <div class="todo-actions">
+        <!-- Add dynamic number -->
+        <span class="todo-actions__spn"
+          ><p class="todo-actions__spn--p"></p>
+          items left</span
+        >
+        <span class="todo-actions-cc" id="clear-completed"
+          >Clear Completed</span
+        >
+      </div>
+
+      <!--! to show us differents kind of todos -->
+      <div class="todo-cls">
+        <!-- <span class="todo-cls__btn" id="all">All</span>
+        <span class="todo-cls__btn" id="active">Active</span>
+        <span class="todo-cls__btn" id="completed">Completed </span> -->
+
+        <button class="todo-cls__btn" id="all">All</button>
+        <button class="todo-cls__btn" id="active">Active</button>
+        <button class="todo-cls__btn" id="completed">Completed</button>
+      </div>
+      <!--* a decription of what to do  -->
+      <p class="description">Drag and drop to reorder list</p>
+    </main>
+
+    
+  </body>
+</html>
