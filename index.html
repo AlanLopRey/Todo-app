@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A todo app challenge from frontendmentor"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Todo app</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-tw">
+        <h1 class="header__h1">Todo</h1>
+        <img
+          src="./images/icon-moon.svg"
+          alt="svg light mode to dark mode"
+          class="header__img"
+        />
+      </div>
+    </header>
+    <main class="main">
+      <!--! the form that alowed us to input todos -->
+      <form class="form">
+        <input
+          class="form__input"
+          type="text"
+          placeholder="Create a new todo..."
+          autofocus
+        />
+      </form>
+
+      <!--! the todo container  -->
+      <div class="todos">
+        <!--? the todo that will make dynamically -->
+
+        <!--! the part that will tell us how many todos we have and the btn for delete the completed -->
+      </div>
+      <div class="todo-actions">
+        <!-- Add dynamic number -->
+        <span class="todo-actions__spn"
+          ><p class="todo-actions__spn--p"></p>
+          items left</span
+        >
+        <span class="todo-actions-cc" id="clear-completed"
+          >Clear Completed</span
+        >
+      </div>
+
+      <!--! to show us differents kind of todos -->
+      <div class="todo-cls">
+        <!-- <span class="todo-cls__btn" id="all">All</span>
+        <span class="todo-cls__btn" id="active">Active</span>
+        <span class="todo-cls__btn" id="completed">Completed </span> -->
+
+        <button class="todo-cls__btn" id="all">All</button>
+        <button class="todo-cls__btn" id="active">Active</button>
+        <button class="todo-cls__btn" id="completed">Completed</button>
+      </div>
+      <!--* a decription of what to do  -->
+      <p class="description">Drag and drop to reorder list</p>
+    </main>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
