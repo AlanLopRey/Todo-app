@@ -11,7 +11,7 @@ const a=document.querySelector(".form"),i=document.querySelector(".todos"),l=doc
         <p class="todo__p">${t}</p>
       </div>
       <img
-        src="./images/icon-cross.svg"
+        src="images/icon-cross.svg"
         alt="delete a todo"
         class="delete-todo"
       />
