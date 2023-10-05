@@ -1,5 +1,5 @@
-import { todoAdd } from "./todo.js";
-todoAdd();
+import { initializeApp } from "./todo.js";
+initializeApp();
 /*todo app
 tengo que saber cuantas features tendra mi app
 ?un light and dark mode

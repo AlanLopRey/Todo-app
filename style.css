@@ -298,3 +298,9 @@ body {
   text-decoration: line-through;
   color: var(--Dark-Grayish-Blue);
 }
+
+/* 5-t */
+
+.active-sect {
+  display: none;
+}
