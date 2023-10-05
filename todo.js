@@ -111,8 +111,25 @@ clearCompleted.addEventListener("click", () => {
   });
 });
 
+// 5-t active state for the btn
+
+function activeBtnState(e) {
+  if (e.target === btnAll) {
+    btnAll.classList.add("active-state");
+    btnActive.classList.remove("active-state");
+    btnCompleted.classList.remove("active-state");
+  } else if (e.target === btnActive) {
+    btnAll.classList.remove("active-state");
+    btnActive.classList.add("active-state");
+    btnCompleted.classList.remove("active-state");
+  } else {
+    btnAll.classList.remove("active-state");
+    btnActive.classList.remove("active-state");
+    btnCompleted.classList.add("active-state");
+  }
+}
 // 5-t Hidde the completed todos for only show the active ones
-function hiddeElementsCompleted() {
+function hiddeElementsCompleted(e) {
   const todoCheckbox = document.querySelectorAll("#checkbox");
 
   todoCheckbox.forEach((checkbox) => {
@@ -123,10 +140,11 @@ function hiddeElementsCompleted() {
       todo.classList.remove("active-sect");
     }
   });
+  activeBtnState(e);
 }
 
 //5-t hidde the actives to only show the completed ones
-function hiddeElementsActive() {
+function hiddeElementsActive(e) {
   const todoCheckbox = document.querySelectorAll("#checkbox");
 
   todoCheckbox.forEach((checkbox) => {
@@ -137,15 +155,17 @@ function hiddeElementsActive() {
       todo.classList.remove("active-sect");
     }
   });
+  activeBtnState(e);
 }
 
 //5-t remove the class active-sect to show every todo active and completed
-function removeHidden() {
+function removeHidden(e) {
   const todos = document.querySelectorAll(".todo");
 
   todos.forEach((todo) => {
     todo.classList.remove("active-sect");
   });
+  activeBtnState(e);
 }
 
 // 5-t

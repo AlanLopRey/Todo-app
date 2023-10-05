@@ -304,3 +304,8 @@ body {
 .active-sect {
   display: none;
 }
+
+.active-state {
+  color: var(--Bright-Blue);
+  font-weight: 700;
+}
