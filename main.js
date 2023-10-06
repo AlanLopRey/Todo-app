@@ -1,5 +1,7 @@
 import { initializeApp } from "./todo.js";
+import { dragDrop } from "./drag_drop.js";
 initializeApp();
+dragDrop();
 /*todo app
 tengo que saber cuantas features tendra mi app
 ?un light and dark mode

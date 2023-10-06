@@ -1,4 +1,5 @@
 import img from "./images/icon-cross.svg";
+import { dragDrop } from "./drag_drop.js";
 //?el todo
 //1-t la opcion de ir agregando los todos y la parte para eliminar con la tachita
 //2-t el check para saber cuando una tarea fue finalizada (y tachar y cambiarle el color al todo)
@@ -22,7 +23,6 @@ const btnCompleted = document.querySelector("#completed");
 //1-t Función para crear un nuevo todo
 function createTodoElement(text) {
   const taskElemMarkup = `
-    <div class="todo">
       <div class="todo-wrapper">
         <input
           class="todo-checkbox"
@@ -37,10 +37,11 @@ function createTodoElement(text) {
         alt="delete a todo"
         class="delete-todo"
       />
-    </div>
   `;
 
   const taskEl = document.createElement("div");
+  taskEl.classList.add("todo");
+  taskEl.setAttribute("draggable", "true");
   taskEl.innerHTML = taskElemMarkup;
   return taskEl;
 }
@@ -56,6 +57,8 @@ function addTodo() {
       inputTodo.value = "";
       toggleTodoCompleted(taskEl); // Agregar evento para tachar elementos
       updateItemCount();
+      //6-t
+      dragDrop();
     }
   });
 }
@@ -179,4 +182,4 @@ function initializeApp() {
   updateItemCount();
 }
 
-export { initializeApp };
+export { initializeApp, createTodoElement };

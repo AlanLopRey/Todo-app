@@ -309,3 +309,7 @@ body {
   color: var(--Bright-Blue);
   font-weight: 700;
 }
+
+.dragging {
+  opacity: 0.4;
+}
