@@ -171,6 +171,7 @@ body {
   border-radius: 5px;
   border-bottom: 2px solid var(--Light-Grayish-Blue);
   padding: 0.35rem;
+  cursor: move;
 }
 .todo__p {
   font-size: 1.125rem;

@@ -6,8 +6,9 @@ import { dragDrop } from "./drag_drop.js";
 //3-t una parte para mostrar los items restantes(no terminados)
 //4-t un botton para borrar los todos completados
 //5-t una seccion que muestre todos los elementos, los activos y los completados
-//*6-t un drag and drop para reordenar la lista
-//!7-t permitir que las tareas se guarden en el localstorage
+//6-t un drag and drop para reordenar la lista
+//6-t.1 the drag list its save in the localstorage
+//!7-t permitir que las tareas se guarden en el localstorage ✔✔✔
 // Obtener elementos del DOM una sola vez
 const formInput = document.querySelector(".form");
 const todosContainer = document.querySelector(".todos");
@@ -19,6 +20,9 @@ const spanP = document.querySelector(".todo-actions__spn--p");
 const btnAll = document.querySelector("#all");
 const btnActive = document.querySelector("#active");
 const btnCompleted = document.querySelector("#completed");
+//! 7-t local storage feature
+let tasksStorage = JSON.parse(localStorage.getItem("todos")) || [];
+let order = localStorage.getItem("order") || [];
 
 //1-t Función para crear un nuevo todo
 function createTodoElement(text) {
@@ -41,12 +45,15 @@ function createTodoElement(text) {
 
   const taskEl = document.createElement("div");
   taskEl.classList.add("todo");
-  taskEl.setAttribute("draggable", "true");
+
+  // taskEl.setAttribute("draggable", "true");
   taskEl.innerHTML = taskElemMarkup;
   return taskEl;
 }
 
 //1-t Función para agregar un nuevo todo a todoContainer
+// ...
+
 function addTodo() {
   formInput.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -54,20 +61,51 @@ function addTodo() {
     if (todoText !== "") {
       const taskEl = createTodoElement(todoText);
       todosContainer.appendChild(taskEl);
+      //!7-t
+      const todoStorage = {
+        id: new Date().getTime(),
+        todoContent: todoText,
+        checked: false,
+      };
+      taskEl.setAttribute("data-id", todoStorage.id);
+      tasksStorage.push(todoStorage);
       inputTodo.value = "";
-      toggleTodoCompleted(taskEl); // Agregar evento para tachar elementos
+      toggleTodoCompleted(taskEl);
       updateItemCount();
-      //6-t
-      dragDrop();
+      //!7-t
+      saveTasksToLocalStorage(); // Llamar a la función para guardar en el local storage
     }
   });
 }
 
+//!7-t local storage function
+function saveTasksToLocalStorage() {
+  localStorage.setItem("todos", JSON.stringify(tasksStorage));
+  localStorage.setItem("order", JSON.stringify(order));
+}
+
+// ...
+
+//1-t Función para eliminar un todo
 //1-t Función para eliminar un todo
 function deleteTodoElement(todoElement) {
+  const todoId = todoElement.getAttribute("data-id"); // Obtener el ID del todo
+  const todoStorageIndex = tasksStorage.findIndex(
+    (todo) => todo.id === parseInt(todoId)
+  );
+
+  if (todoStorageIndex !== -1) {
+    tasksStorage.splice(todoStorageIndex, 1); // Eliminar el todo del arreglo
+    localStorage.removeItem(order);
+    saveTasksToLocalStorage(); // Actualizar el local storage
+  }
+
   todoElement.remove();
+
   updateItemCount();
 }
+
+// ...
 
 //1-t Event listener para eliminar un todo individualmente
 todosContainer.addEventListener("click", (e) => {
@@ -80,11 +118,22 @@ todosContainer.addEventListener("click", (e) => {
 });
 
 //2-t Función para tachar los elementos terminados
+//2-t Función para tachar los elementos terminados
 function toggleTodoCompleted(todoElement) {
   const checkbox = todoElement.querySelector(".todo-checkbox");
   const todoP = todoElement.querySelector(".todo__p");
 
   checkbox.addEventListener("change", () => {
+    const todoId = todoElement.getAttribute("data-id"); // Obtener el ID del todo
+    const todoStorageIndex = tasksStorage.findIndex(
+      (todo) => todo.id === parseInt(todoId)
+    );
+
+    if (todoStorageIndex !== -1) {
+      tasksStorage[todoStorageIndex].checked = checkbox.checked;
+      saveTasksToLocalStorage(); // Actualizar el estado en el local storage
+    }
+
     todoP.classList.toggle("checked-active", checkbox.checked);
     updateItemCount();
   });
@@ -177,9 +226,37 @@ btnActive.addEventListener("click", hiddeElementsCompleted);
 btnCompleted.addEventListener("click", hiddeElementsActive);
 
 // Inicializar la aplicación
+// ...
+// Inicializar la aplicación
 function initializeApp() {
-  addTodo();
+  // Limpia el contenido del container antes de agregar elementos
+  todosContainer.innerHTML = "";
+
+  // Crear los todos desde el local storage al cargar la página
+  //!7-t local storage
+  tasksStorage.forEach((task) => {
+    const taskEl = createTodoElement(task.todoContent);
+    taskEl.setAttribute("data-id", task.id);
+    todosContainer.appendChild(taskEl);
+    if (task.checked) {
+      const checkbox = taskEl.querySelector(".todo-checkbox");
+      const todoP = taskEl.querySelector(".todo__p");
+      checkbox.checked = true;
+      todoP.classList.add("checked-active");
+    }
+    toggleTodoCompleted(taskEl);
+  });
+
   updateItemCount();
+  //6-t
+  dragDrop();
+  addTodo();
 }
 
-export { initializeApp, createTodoElement };
+//!7-t
+// Ejecuta initializeApp solo una vez al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+  initializeApp();
+});
+
+export { initializeApp, createTodoElement, addTodo };
