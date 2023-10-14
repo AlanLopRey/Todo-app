@@ -4,9 +4,14 @@
 
 function switchTheme() {
   const switchBtn = document.querySelector(".switch-theme");
-  console.log(switchBtn);
   switchBtn.addEventListener("click", () => {
     document.body.classList.toggle("darkmode");
+
+    if (document.body.classList.contains("darkmode")) {
+      switchBtn.src = "./images/icon-sun.svg";
+    } else {
+      switchBtn.src = "./images/icon-moon.svg";
+    }
   });
 }
 
