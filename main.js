@@ -6,7 +6,7 @@ dragDrop();
 switchTheme();
 /*todo app
 tengo que saber cuantas features tendra mi app
-?un light and dark mode
+?un light and dark mode✔
 
 ?el todo
 *la opcion de ir agregando todos
