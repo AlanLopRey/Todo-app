@@ -176,7 +176,7 @@ body {
 }
 .todo-wrapper {
   display: flex;
-  width: 100%;
+  width: 90%;
   align-items: center;
 }
 .todo {
@@ -189,13 +189,16 @@ body {
   border-radius: 5px;
   border-bottom: 2px solid var(--Border-color);
   padding: 0.35rem;
-  cursor: move;
 }
 .todo__p {
   font-size: 1.125rem;
   color: var(--Main-font-color);
   width: 80%;
   height: 90%;
+  min-width: 2rem;
+  min-height: 1.7rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .todo-checkbox {

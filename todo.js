@@ -1,14 +1,15 @@
 import img from "./images/icon-cross.svg";
 import { dragDrop } from "./drag_drop.js";
 //?el todo
-//1-t la opcion de ir agregando los todos y la parte para eliminar con la tachita
-//2-t el check para saber cuando una tarea fue finalizada (y tachar y cambiarle el color al todo)
-//3-t una parte para mostrar los items restantes(no terminados)
-//4-t un botton para borrar los todos completados
-//5-t una seccion que muestre todos los elementos, los activos y los completados
-//6-t un drag and drop para reordenar la lista
-//6-t.1 the drag list its save in the localstorage
+//1-t la opcion de ir agregando los todos y la parte para eliminar con la tachita✔
+//2-t el check para saber cuando una tarea fue finalizada (y tachar y cambiarle el color al todo)✔
+//3-t una parte para mostrar los items restantes(no terminados)✔
+//4-t un botton para borrar los todos completados✔
+//5-t una seccion que muestre todos los elementos, los activos y los completados✔
+//6-t un drag and drop para reordenar la ✔
+//6-t.1 the drag list its save in the localstorage✔
 //!7-t permitir que las tareas se guarden en el localstorage ✔✔✔
+//*8-t hacer que el usuario pueda editar el todo una vez agregado
 // Obtener elementos del DOM una sola vez
 const formInput = document.querySelector(".form");
 const todosContainer = document.querySelector(".todos");
@@ -34,7 +35,7 @@ function createTodoElement(text) {
           name="todo-check"
           id="checkbox"
         />
-        <p class="todo__p">${text}</p>
+        <p class="todo__p" contenteditable="false">${text}</p>
       </div>
       <img
         src="${img}"
@@ -52,14 +53,14 @@ function createTodoElement(text) {
 }
 
 //1-t Función para agregar un nuevo todo a todoContainer
-// ...
-
 function addTodo() {
   formInput.addEventListener("submit", (e) => {
     e.preventDefault();
     const todoText = inputTodo.value.trim();
+
     if (todoText !== "") {
       const taskEl = createTodoElement(todoText);
+
       todosContainer.appendChild(taskEl);
       //!7-t
       const todoStorage = {
@@ -71,12 +72,45 @@ function addTodo() {
       tasksStorage.push(todoStorage);
       inputTodo.value = "";
       toggleTodoCompleted(taskEl);
+
       updateItemCount();
+      //*8-t -- poder editar un todo inmediatamente despues de agregado
+      //iterar sobre todos los elementos p para modificar el contenido y el local storage tambien
+      const editableP = taskEl.querySelectorAll(".todo__p");
+      editableP.forEach((p) => {
+        //event listener a el elemento p cuando se haga click hacerlo editable
+        p.addEventListener("click", () => {
+          p.setAttribute("contenteditable", "true");
+        });
+        //al hacer enter cambiar el contenido de todoContent igual al texto del elemento p
+        p.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            todoStorage.todoContent = p.innerText;
+            //una vez terminado de agregar el contenido con el innertext del elemento p hacer que ya no se pueda editar
+            p.setAttribute("contenteditable", "false");
+            saveTasksToLocalStorage(); // Llamar a la función para guardar en el local storage
+          }
+        });
+
+        //guardar el todo si el elemento p pierde el foco
+        p.addEventListener("blur", () => {
+          todoStorage.todoContent = p.innerText;
+          p.setAttribute("contenteditable", "false");
+          saveTasksToLocalStorage();
+        });
+      });
+
       //!7-t
       saveTasksToLocalStorage(); // Llamar a la función para guardar en el local storage
     }
   });
 }
+
+//8-t
+// function todoEditable() {
+
+// }
 
 //!7-t local storage function
 function saveTasksToLocalStorage() {
@@ -226,8 +260,6 @@ btnActive.addEventListener("click", hiddeElementsCompleted);
 btnCompleted.addEventListener("click", hiddeElementsActive);
 
 // Inicializar la aplicación
-// ...
-// Inicializar la aplicación
 function initializeApp() {
   // Limpia el contenido del container antes de agregar elementos
   todosContainer.innerHTML = "";
@@ -238,6 +270,33 @@ function initializeApp() {
     const taskEl = createTodoElement(task.todoContent);
     taskEl.setAttribute("data-id", task.id);
     todosContainer.appendChild(taskEl);
+    //*8-t --poder editar un todo una vez cargado del localstorage
+    //iterar sobre todos los elementos p para modificar el contenido y el local storage tambien
+    const editableP = taskEl.querySelectorAll(".todo__p");
+    editableP.forEach((p) => {
+      //event listener a el elemento p cuando se haga click hacerlo editable
+      p.addEventListener("click", () => {
+        p.setAttribute("contenteditable", "true");
+      });
+      //al hacer enter cambiar el contenido de todoContent igual al texto del elemento p
+      p.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          task.todoContent = p.innerText;
+          //una vez terminado de agregar el contenido con el innertext de p hacer que ya no se pueda editar
+          p.setAttribute("contenteditable", "false");
+          saveTasksToLocalStorage(); // Llamar a la función para guardar en el local storage
+        }
+      });
+
+      //guardar el todo si el p pierde el foco
+      p.addEventListener("blur", () => {
+        task.todoContent = p.innerText;
+        //una vez terminado de agregar el contenido con el innertext de p hacer que ya no se pueda editar
+        p.setAttribute("contenteditable", "false");
+        saveTasksToLocalStorage(); // Llamar a la función para guardar en el local storage
+      });
+    });
     if (task.checked) {
       const checkbox = taskEl.querySelector(".todo-checkbox");
       const todoP = taskEl.querySelector(".todo__p");
@@ -246,17 +305,11 @@ function initializeApp() {
     }
     toggleTodoCompleted(taskEl);
   });
-
   updateItemCount();
   //6-t
   dragDrop();
   addTodo();
+  //8-t
 }
-
-//!7-t
-// Ejecuta initializeApp solo una vez al cargar la página
-document.addEventListener("DOMContentLoaded", () => {
-  initializeApp();
-});
 
 export { initializeApp, createTodoElement, addTodo };
