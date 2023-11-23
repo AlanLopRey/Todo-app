@@ -134,6 +134,10 @@ body {
 .header__h1 {
   font-size: 2rem;
   color: var(--h1-font);
+  font-family: var(--font);
+  font-weight: 400;
+  letter-spacing: 1rem;
+  text-transform: uppercase;
 }
 
 .header__img {
@@ -335,4 +339,51 @@ body {
 
 .dragging {
   opacity: 0.4;
+}
+
+@media screen and (min-width: 780px) {
+  :root {
+    --background-img: url(./images/bg-desktop-light.jpg);
+  }
+
+  .darkmode {
+    --background-img: url(./images/bg-desktop-dark.jpg);
+  }
+
+  .main {
+    max-width: 35rem;
+  }
+  .form {
+    height: 3.2rem;
+  }
+
+  .header {
+    background-image: var(--background-img);
+  }
+
+  .header-tw {
+    width: 34rem;
+    max-width: none;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .header__h1 {
+    font-size: 3rem;
+  }
+
+  .header__img {
+    width: 2rem;
+  }
+
+  .todo {
+    height: 3.2rem;
+  }
+  .todo-cls {
+    width: 50%;
+    align-self: center;
+    position: relative;
+    top: -4rem;
+    right: 1rem;
+  }
 }
