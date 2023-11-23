@@ -377,7 +377,7 @@ body {
   }
 
   .todo {
-    height: 3.2rem;
+    min-height: 3.2rem;
   }
   .todo-cls {
     width: 50%;
